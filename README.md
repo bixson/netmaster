@@ -11,7 +11,7 @@
 
   TCP/IP + DNS + HTTP  ─  Learn networking hands-on
 ```
-[![version](https://img.shields.io/badge/version-1.0.0-blue)](#)
+[![version](https://img.shields.io/badge/version-2.0.0-blue)](#)
 [![bash](https://img.shields.io/badge/requires-bash%204.0%2B-lightgrey)](#)
 [![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Git%20Bash-brightgreen)](#)
 [![license](https://img.shields.io/badge/license-MIT-green)](#)
@@ -107,50 +107,56 @@ sudo apt install dnsutils
 ```
   Q: What does TTL mean in a TCP/IP packet — and what would be a better name?
 
-    1) Seconds until the packet expires in a cache
-    2) Max hops before packet is dropped — better name: 'hopcount'
-    3) Size limit of the packet in bytes
-    4) Time to wait for an ACK before retrying
+    A) Seconds until the packet expires in a cache
+    B) Max hops before packet is dropped — better name: 'hopcount'
+    C) Size limit of the packet in bytes
+    D) Time to wait for an ACK before retrying
 
-  Your answer (number): 1
+  Your answer [A/B/C/D]: A
 
-  ✗ Not quite.
-    Try again (include the key term)...
+  ✗  TTL is not a cache timer in TCP packets — that's DNS TTL.
+     In IP packets it counts router hops, not time.
 
-  Your answer (number): 3
+  [RETRY] One more try for half points [A/B/C/D]: C
 
-  ✗ Not quite.
+  ✗  Still not right. Moving on.
 
-  ╔══ HINT ══════════════════════════════════════════════════╗
-  ║  Correct answer: Max hops before packet is dropped —    ║
-  ║  better name: 'hopcount'                                ║
-  ╚══════════════════════════════════════════════════════════╝
+  ┌─ Correct Answer ──────────────────────────────────────┐
+  │  B) Max hops before packet is dropped — 'hopcount'   │
+  └───────────────────────────────────────────────────────┘
+
+  ┌─ Remember ────────────────────────────────────────────┐
+  │  Despite the name, TTL counts hops not seconds.      │
+  │  Each router decrements it by 1. At 0: packet drop.  │
+  └───────────────────────────────────────────────────────┘
 ```
 
-Two wrong attempts reveal the answer and explanation. You still move forward — nothing blocks you. First-try correct answers are the ones that count toward your score.
+First wrong answer shows exactly why *your specific choice* was wrong, then gives you one retry for half points. A second wrong answer reveals the correct answer, a teaching moment, and a memory tip. You always move forward — nothing blocks you.
 
 ---
 
 ## Scoring
 
-| Score | Grade estimate |
-|-------|---------------|
-| 90%+ | ★ Expert (12) |
-| 75–89% | ★ Proficient (10) |
-| 60–74% | ★ Competent (7) |
-| 40–59% | ★ Developing (4) |
-| Below 40% | ★ Needs work (02/below) |
+| Score | Grade |
+|-------|-------|
+| 90%+ | 12 — Outstanding |
+| 75–89% | 10 — Excellent |
+| 55–74% | 7 — Good pass |
+| 35–54% | 4 — Barely passing |
+| Below 35% | 02 — Run it again |
 
-Your score is saved between sessions in `~/.netmaster/score.txt`. Run `--reset` to start fresh.
+Half points are awarded for correct answers on the second attempt. Zone progress is tracked in `~/.netmaster/`. Run `--reset` to wipe it.
 
 ---
 
 ## Controls
 
-| Key / Input | Action |
-|-------------|--------|
-| `1` `2` `3` `4` | Select multiple-choice answer |
-| `Enter` | Confirm / move to next step |
+| Key | Action |
+|-----|--------|
+| `A` `B` `C` `D` | Select multiple-choice answer (single keypress, no Enter needed) |
+| `Enter` | Confirm typed answer / advance past a teaching screen |
+| `Ctrl+N` | Skip question and mark it as correct |
+| `Ctrl+B` | Go back one question (re-asks it with a clean screen) |
 | `Ctrl+C` | Exit at any point |
 
 ---
@@ -160,7 +166,7 @@ Your score is saved between sessions in `~/.netmaster/score.txt`. Run `--reset` 
 ```
 bash netmaster.sh               # Full run — all 8 zones in sequence
 bash netmaster.sh --zone 7      # Jump straight to the dig lab
-bash netmaster.sh --list        # Show zone map with completion status
+bash netmaster.sh --list        # Show zone map
 bash netmaster.sh --reset       # Wipe saved score and zone progress
 bash netmaster.sh --version     # Print version
 bash netmaster.sh --help        # Print this help
