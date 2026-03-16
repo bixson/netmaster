@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netmaster
+  labels:
+    app: netmaster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netmaster
+  template:
+    metadata:
+      labels:
+        app: netmaster
+    spec:
+      containers:
+        - name: netmaster
+          image: ghcr.io/bixson/netmaster:latest
+          ports:
+            - containerPort: 7681
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
